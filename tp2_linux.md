@@ -34,6 +34,7 @@ rtt min/avg/max/mdev = 24.160/26.249/28.148/1.640 ms
 - ping ynov.com
 ``` 
 roxanne@NODE1:~$ ping ynov.com -c 4
+# on envoie 4 ping au lieu de 56 par défaut
 
 PING ynov.com (92.243.16.143) 56(84) bytes of data.
 64 octets de xvm-16-143.dc0.ghst.net (92.243.16.143) : icmp_seq=1 ttl=50 temps=24.9 ms
@@ -76,7 +77,9 @@ Lecture des informations d'état... Fait
 openssh-server est déjà la version la plus récente (1:8.2p1-4ubuntu0.3).
 0 mis à jour, 0 nouvellement installés, 0 à enlever et 96 non mis à jour.
 
-roxanne@NODE1:~$ ssh
+roxanne@NODE1:~$ man ssh
+#on regarde les options associées à la commande ssh
+
 usage: ssh [-46AaCfGgKkMNnqsTtVvXxYy] [-B bind_interface]
            [-b bind_address] [-c cipher_spec] [-D [bind_address:]port]
            [-E log_file] [-e escape_char] [-F configfile] [-I pkcs11]
@@ -192,6 +195,8 @@ Last login: Mon Oct 25 16:24:39 2021 from 192.168.251.1
 - Modifier le comportement du service
 ```bash
 roxanne@NODE1:/etc/ssh$ sudo nano sshd_config
+#modification du port dans le fichier conf
+
 Include /etc/ssh/sshd_config.d/*.conf
 
 roxanne@NODE1:/etc/ssh$ cat sshd_config
@@ -203,6 +208,7 @@ Port 4242
 [...]
 
 roxanne@NODE1:~$ ss -l | grep 4242
+#recherche du port ssh dans la liste des ports actifs
 
 tcp     LISTEN   0        128                                           0.0.0.0:4242                                      0.0.0.0:*                             
 
@@ -330,6 +336,9 @@ Thu Nov  4 18:53:59 2021 [pid 2371] [roxanne] OK DOWNLOAD: Client "::ffff:192.16
 
 ```bash
 roxanne@NODE1:/etc$ sudo nano vsftpd.conf
+#on décommente la ligne read/write
+
+roxanne@NODE1:/etc$ sudo cat vsftpd.conf
 [...]
 # Uncomment this to enable any form of FTP write command.
 write_enable=YES
@@ -347,7 +356,9 @@ Thu Nov  4 19:07:21 2021 [pid 2470] [roxanne] OK UPLOAD: Client "::ffff:192.168.
 
 - Modifier le comportement d'un service
 ```bash
-roxanne@NODE1:/etc$ sudo nano vsftpd.conf 
+roxanne@NODE1:/etc$ sudo nano vsftpd.conf
+#on modifie le port de vsftpd
+
 roxanne@NODE1:/etc$ sudo cat vsftpd.conf 
 listen_port=1234
 
