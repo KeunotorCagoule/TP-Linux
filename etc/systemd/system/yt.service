@@ -1,0 +1,8 @@
+[Unit]
+Description=Youtube Download (TP3)
+
+[Service]
+ExecStart=/srv/yt/yt-v2.sh
+
+[Install]
+WantedBy=multi-user.target
