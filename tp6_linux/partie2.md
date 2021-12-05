@@ -85,3 +85,17 @@ Dec 05 13:22:22 backup.tp6.linux systemd[1]: Started NFS server and services.
 [roxanne@backup ~]$ sudo systemctl enable nfs-server
 Created symlink /etc/systemd/system/multi-user.target.wants/nfs-server.service → /usr/lib/systemd/system/nfs-server.service.
 ```
+
+- Firewall
+
+```bash
+# on ouvre le port 2049
+[roxanne@backup ~]$ sudo firewall-cmd --add-port=2049/tcp --permanent
+[sudo] password for roxanne:
+success
+
+# la machine écoute sur le port 2049
+[roxanne@backup ~]$ sudo ss -lptn | grep 2049
+LISTEN 0      64           0.0.0.0:2049       0.0.0.0:*
+LISTEN 0      64              [::]:2049          [::]:*
+```
